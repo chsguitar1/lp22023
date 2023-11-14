@@ -17,6 +17,7 @@ public class EnderecoController implements IOperacao{
 
     @Override
     public void cadastrar() {
+        endereco.cadastrar();
     }
 
     @Override
@@ -33,5 +34,15 @@ public class EnderecoController implements IOperacao{
     public void cancelar() {
       
     }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+    
+    
     
 }

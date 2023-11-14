@@ -36,6 +36,8 @@ public class Cidade implements IOperacao {
          String insert  = "insert into cidade(nome_cidade, codigo_ibge) "
                 + "values('"+getNome()+"',"+getCodibge()+")";
         System.out.println(insert);
+        BancoDeDados.LISTA_CIDADES.add(this);
+        System.out.println("lista de cidades"+BancoDeDados.LISTA_CIDADES);
     }
 
     @Override
