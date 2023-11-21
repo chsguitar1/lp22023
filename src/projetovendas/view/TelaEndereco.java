@@ -28,12 +28,14 @@ public class TelaEndereco extends javax.swing.JFrame {
     }
 
     private void montaCombo() {
-
+        jCCidade.addItem("Selecione");
         for (int x = 0; x < BancoDeDados.LISTA_CIDADES.size(); x++) {
 //          Cidade cidade =    BancoDeDados.LISTA_CIDADES.get(x);
 //          String nomeCidade = cidade.getNome();
 //          jCCidade.addItem(nomeCidade);
-            jCCidade.addItem(BancoDeDados.LISTA_CIDADES.get(x).getNome());
+           
+                jCCidade.addItem(BancoDeDados.LISTA_CIDADES.get(x).getNome());
+           
         }
 
     }
@@ -158,9 +160,9 @@ public class TelaEndereco extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
-    enderecoController.getEndereco().setBairro(jTbairro.getText());
-    enderecoController.getEndereco().setLogradouro(jTLogradouro.getText());
-    enderecoController.cadastrar();
+        enderecoController.getEndereco().setBairro(jTbairro.getText());
+        enderecoController.getEndereco().setLogradouro(jTLogradouro.getText());
+        enderecoController.cadastrar();
 
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
@@ -180,14 +182,14 @@ public class TelaEndereco extends javax.swing.JFrame {
 //        Integer posicao = jCCidade.getSelectedIndex();
 //        Cidade cidadeSelecionada = BancoDeDados.LISTA_CIDADES.get(posicao);
 //        System.out.println("cidade selecionada "+cidadeSelecionada);
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
+        if (evt.getStateChange() == ItemEvent.SELECTED && jCCidade.getSelectedIndex() > 0) {
             System.out.println("cidade selecionada"
-                    + BancoDeDados.LISTA_CIDADES.get(jCCidade.getSelectedIndex()));
+                    + BancoDeDados.LISTA_CIDADES.get(jCCidade.getSelectedIndex()-1));
             enderecoController.setEndereco(new Endereco());
             enderecoController
                     .getEndereco()
-                    .setCidade(BancoDeDados.LISTA_CIDADES.get(jCCidade.getSelectedIndex()));
-        
+                    .setCidade(BancoDeDados.LISTA_CIDADES.get(jCCidade.getSelectedIndex()-1));
+
         }
     }//GEN-LAST:event_jCCidadeItemStateChanged
 
