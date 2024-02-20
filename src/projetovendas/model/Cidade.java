@@ -6,9 +6,12 @@ package projetovendas.model;
 
 
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import projetovendas.interfaces.IOperacao;
 
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,7 +72,23 @@ public class Cidade implements IOperacao {
     public void cancelar() {
 
     }
-
+    public List<Cidade> getListaCidadesModel() {
+        String select = "select nome_cidade, codigo_ibge from cidade";
+        List<Cidade> listasCidadeDB = new ArrayList();
+        mysqStatement = ConexaoDB.getStatement();
+        try {
+            ResultSet rs =  mysqStatement.executeQuery(select);
+            while (rs.next()){
+                Cidade cid = new Cidade();
+                cid.setCodibge(rs.getInt("cod_ibge"));
+                cid.setNome(rs.getString("nome_cidade"));
+                listasCidadeDB.add(cid);
+            }
+        } catch (SQLException ex) {
+          ex.printStackTrace();
+        }
+        return listasCidadeDB;
+    }
     @Override
     public String toString() {
         return "Cidade{" + "nome=" + nome + ", codibge=" + codibge + '}';
