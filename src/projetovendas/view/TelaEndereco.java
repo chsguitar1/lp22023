@@ -4,15 +4,20 @@
  */
 package projetovendas.view;
 
+import java.awt.event.ItemEvent;
+import java.util.ArrayList;
+import java.util.List;
 import projetovendas.controller.EnderecoController;
+import projetovendas.model.Cidade;
 
 /**
  *
  * @author aluno
  */
 public class TelaEndereco extends javax.swing.JFrame {
-    
+
     EnderecoController enderecoController;
+    List<Cidade> cidades = new ArrayList();
 
     /**
      * Creates new form TelaEndereco
@@ -20,6 +25,16 @@ public class TelaEndereco extends javax.swing.JFrame {
     public TelaEndereco() {
         initComponents();
         enderecoController = new EnderecoController();
+        montaCombo();
+    }
+
+    private void montaCombo() {
+        cidades = enderecoController.getListaCidade();
+
+        for (Cidade cid : cidades) {
+            jCCidade.addItem(cid.getNome());
+        }
+
     }
 
     /**
@@ -42,7 +57,7 @@ public class TelaEndereco extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTbairro = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jBCadastrar.setText("Cadastrar");
         jBCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +92,11 @@ public class TelaEndereco extends javax.swing.JFrame {
 
         jLabel2.setText("Cidade");
 
-        jCCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCCidade.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCCidadeItemStateChanged(evt);
+            }
+        });
 
         jLabel3.setText("Bairro");
 
@@ -133,21 +152,31 @@ public class TelaEndereco extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
-      
+        enderecoController.getEndereco().setBairro(jTbairro.getText());
+        enderecoController.getEndereco().setLogradouro(jTLogradouro.getText());
+        enderecoController.cadastrar();
 
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
-      
+
     }//GEN-LAST:event_jBCancelarActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
-        
+
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jTLogradouroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTLogradouroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTLogradouroActionPerformed
+
+    private void jCCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCCidadeItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            System.out.println(cidades.get(jCCidade.getSelectedIndex()));
+            Cidade cidadeModel = cidades.get(jCCidade.getSelectedIndex());
+            enderecoController.setCidade(cidadeModel);
+        }
+    }//GEN-LAST:event_jCCidadeItemStateChanged
 
     /**
      * @param args the command line arguments
