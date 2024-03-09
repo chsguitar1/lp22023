@@ -97,6 +97,11 @@ public class TelaEndereco extends javax.swing.JFrame {
                 jCCidadeItemStateChanged(evt);
             }
         });
+        jCCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCCidadeActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Bairro");
 
@@ -177,6 +182,10 @@ public class TelaEndereco extends javax.swing.JFrame {
             enderecoController.setCidade(cidadeModel);
         }
     }//GEN-LAST:event_jCCidadeItemStateChanged
+
+    private void jCCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCCidadeActionPerformed
 
     /**
      * @param args the command line arguments
