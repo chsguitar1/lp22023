@@ -17,14 +17,11 @@ public class EnderecoController implements IOperacao{
     
     private Endereco endereco;
     private Cidade cidade;
-
+    
     public EnderecoController() {
         this.endereco = new Endereco();
         this.cidade = new Cidade();
     }
-    
-    
-    
 
     @Override
     public void cadastrar() {
@@ -39,7 +36,8 @@ public class EnderecoController implements IOperacao{
 
     @Override
     public boolean excluir() {
-      return false;
+        endereco=null;
+      return true;
     }
 
     @Override
